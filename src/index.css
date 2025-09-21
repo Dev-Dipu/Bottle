@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+
+@font-face {
+    font-family: 'switzer';
+    src: url('/fonts/Switzer-Medium.otf') format('opentype');
+}
+
+@font-face {
+    font-family: 'ppedit';
+    src: url('/fonts/ppedit.otf') format('opentype');
+}
