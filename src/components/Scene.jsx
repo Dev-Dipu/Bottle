@@ -34,9 +34,20 @@ export default function Scene() {
     const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
     scene.add(ambientLight);
 
-    const dirLight = new THREE.DirectionalLight(0xffffff, 1);
-    dirLight.position.set(5, 10, 7);
+    // Improved Directional Light (key light)
+    const dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    dirLight.position.set(2, 6, 8);
+    dirLight.castShadow = true;
+    dirLight.shadow.bias = -0.0001;
+    dirLight.shadow.mapSize.width = 1024;
+    dirLight.shadow.mapSize.height = 1024;
     scene.add(dirLight);
+
+    // Rim Light (back light for highlight)
+    const rimLight = new THREE.DirectionalLight(0xf03a52, 2);
+    rimLight.position.set(-4, 4, -6); // behind and above the bottle
+    rimLight.color.setHSL(0, 1, 0.7); // reddish tint (hue=0 for red)
+    scene.add(rimLight);
 
     // Controls
     const controls = new OrbitControls(camera, renderer.domElement);
@@ -54,7 +65,9 @@ export default function Scene() {
           child.material.envMapIntensity = 1.2;
         }
       });
-      bottle.position.set(0, -0.14, 0);
+      bottle.position.set(0, -0.15, 0);
+      bottle.rotation.z = Math.PI / -25;
+      bottle.scale.set(1.08, 1.08, 1.08);
       scene.add(bottle);
     });
 
@@ -62,11 +75,11 @@ export default function Scene() {
     const animate = () => {
       requestAnimationFrame(animate);
 
-      if (bottle) {
-        bottle.rotation.y += 0.005;
-      }
+      // if (bottle) {
+      //   bottle.rotation.y += 0.005;
+      // }
 
-      controls.update();
+      // controls.update();
       renderer.render(scene, camera);
     };
     animate();
