@@ -12,13 +12,13 @@ const slides = [
   {
     title: "Crafted to Perfection",
     desc: "Blended with heritage and modern craftsmanship, FOSH is created to deliver a perfectly balanced taste, with a smooth finish and luxurious aroma that delights every sense.",
-    img: "/images/fosh2.png",
+    img: "/images/bartan.jpeg",
     rotation: 0.15,
   },
   {
     title: "Raise Your Spirit",
     desc: "Celebrate life with timeless luxury in a bottle, savoring every moment with friends and family. FOSH inspires unforgettable experiences with its bold character and refined elegance.",
-    img: "/images/fosh3.png",
+    img: "/images/chess.jpeg",
     rotation: 0.3,
   },
 ];
