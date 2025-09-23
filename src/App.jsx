@@ -23,7 +23,6 @@ const slides = [
   },
 ];
 
-
 export default function App() {
   const [active, setActive] = useState(0);
 
@@ -35,26 +34,37 @@ export default function App() {
       new CustomEvent("bottleRotate", { detail: slides[index].rotation })
     );
 
-    // Animate text & image
+    // Animate text with blur reveal
     gsap.fromTo(
-      ".content .text",
-      { opacity: 0, x: -50, clipPath: "inset(0 100% 0 0)" },
+      ".content .text h1, .content .text p",
+      {
+        opacity: 0,
+        x: -30,
+        filter: "blur(15px)",
+      },
       {
         opacity: 1,
         x: 0,
-        clipPath: "inset(0 0% 0 0)",
-        duration: 1,
+        filter: "blur(0px)",
+        duration: 1.2,
         ease: "power3.out",
+        stagger: 0.15, // reveal heading then paragraph
       }
     );
+
+    // Animate image with blur reveal
     gsap.fromTo(
-      ".content .image",
-      { opacity: 0, y: 50, clipPath: "inset(100% 0 0 0)" },
+      ".content .image img",
+      {
+        opacity: 0,
+        y: 50,
+        filter: "blur(20px)",
+      },
       {
         opacity: 1,
         y: 0,
-        clipPath: "inset(0% 0 0 0)",
-        duration: 1,
+        filter: "blur(0px)",
+        duration: 1.2,
         ease: "power3.out",
       }
     );
@@ -67,17 +77,38 @@ export default function App() {
       {/* Main Content */}
       <div className="absolute inset-0 text-white font-[switzer] flex flex-col justify-between">
         <header className="px-10 py-8 flex items-center justify-between relative">
-          <h3>Alcohol Bottle</h3>
+          {/* Whiskey with hover effect */}
+          <h3 className="relative overflow-hidden group cursor-pointer">
+            <span className="block transition-transform duration-300 group-hover:-translate-y-full">
+              Whiskey
+            </span>
+            <span className="block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-full">
+              Whiskey
+            </span>
+          </h3>
+
           <img
             src="/images/fosh.svg"
             alt="Wine Bottle"
             className="scale-125 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-1"
           />
+
+          {/* Navbar with hover effect */}
           <nav className="flex gap-12">
-            <a href="#">Home</a>
-            <a href="#">About</a>
-            <a href="#">Brand</a>
-            <a href="#">Shop</a>
+            {["Home", "About", "Brand", "Shop"].map((item, i) => (
+              <a
+                key={i}
+                href="#"
+                className="relative overflow-hidden group cursor-pointer"
+              >
+                <span className="block transition-transform duration-300 group-hover:-translate-y-full">
+                  {item}
+                </span>
+                <span className="block absolute left-0 top-full transition-transform duration-300 group-hover:-translate-y-full">
+                  {item}
+                </span>
+              </a>
+            ))}
           </nav>
         </header>
 

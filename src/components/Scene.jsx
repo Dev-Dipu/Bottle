@@ -58,7 +58,7 @@ export default function Scene() {
       bottleRef.current = bottle;
     });
 
-    // Clock for breathing
+    // Clock for animation
     const clock = new THREE.Clock();
 
     const animate = () => {
@@ -66,7 +66,12 @@ export default function Scene() {
 
       if (bottleRef.current) {
         const t = clock.getElapsedTime();
+
+        // Floating effect
         bottleRef.current.position.y = -0.15 + Math.sin(t * 1.5) * 0.01;
+
+        // Continuous rotation (slow)
+        bottleRef.current.rotation.y += 0.002;
       }
 
       renderer.render(scene, camera);
@@ -81,7 +86,7 @@ export default function Scene() {
     };
     window.addEventListener("resize", handleResize);
 
-    // Bottle rotation listener
+    // Bottle rotation listener (optional extra GSAP rotation)
     const handleBottleRotate = (e) => {
       if (bottleRef.current) {
         gsap.to(bottleRef.current.rotation, {
