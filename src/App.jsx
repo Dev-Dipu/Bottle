@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Scene from "./components/Scene";
 import { gsap } from "gsap";
+import ImageWobble from "./components/ImageWobble";
 
 const slides = [
   {
@@ -37,35 +38,14 @@ export default function App() {
     // Animate text with blur reveal
     gsap.fromTo(
       ".content .text h1, .content .text p",
-      {
-        opacity: 0,
-        x: -30,
-        filter: "blur(15px)",
-      },
+      { opacity: 0, x: -30, filter: "blur(15px)" },
       {
         opacity: 1,
         x: 0,
         filter: "blur(0px)",
         duration: 1.2,
         ease: "power3.out",
-        stagger: 0.15, // reveal heading then paragraph
-      }
-    );
-
-    // Animate image with blur reveal
-    gsap.fromTo(
-      ".content .image img",
-      {
-        opacity: 0,
-        y: 50,
-        filter: "blur(20px)",
-      },
-      {
-        opacity: 1,
-        y: 0,
-        filter: "blur(0px)",
-        duration: 1.2,
-        ease: "power3.out",
+        stagger: 0.15,
       }
     );
   };
@@ -77,7 +57,6 @@ export default function App() {
       {/* Main Content */}
       <div className="absolute inset-0 text-white font-[switzer] flex flex-col justify-between">
         <header className="px-10 py-8 flex items-center justify-between relative">
-          {/* Whiskey with hover effect */}
           <h3 className="relative overflow-hidden group cursor-pointer">
             <span className="block transition-transform duration-300 group-hover:-translate-y-full">
               Whiskey
@@ -93,7 +72,6 @@ export default function App() {
             className="scale-125 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 mt-1"
           />
 
-          {/* Navbar with hover effect */}
           <nav className="flex gap-12">
             {["Home", "About", "Brand", "Shop"].map((item, i) => (
               <a
@@ -119,11 +97,7 @@ export default function App() {
             <p className="leading-none mt-3">{slides[active].desc}</p>
           </div>
           <div className="h-48 aspect-video overflow-hidden image">
-            <img
-              className="h-full w-full object-cover"
-              src={slides[active].img}
-              alt="party"
-            />
+            <ImageWobble src={slides[active].img} />
           </div>
         </div>
 
